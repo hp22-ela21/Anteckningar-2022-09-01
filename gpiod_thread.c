@@ -5,8 +5,7 @@
 #include "gpiod_thread.h"
 
 /* Statiska funktioner: */
-static struct gpiod_line* gpiod_line_new(const uint8_t pin,
-                                         const char* alias);
+static struct gpiod_line* gpiod_line_new(const uint8_t pin);
 
 /********************************************************************************
 * gpiod_thread_new: Initierar en ny GPIO-tråd, där GPIO-linjen på angivet 
@@ -25,7 +24,7 @@ void gpiod_thread_new(struct gpiod_thread* self,
                       const char* alias,
                       const size_t blink_speed_ms)
 {
-   self->line = gpiod_line_new(pin, alias);
+   self->line = gpiod_line_new(pin);
    self->enabled = false;
    self->blink_speed_ms = blink_speed_ms;
    gpiod_line_request_output(self->line, alias, 0);
@@ -64,17 +63,13 @@ void* gpiod_thread_run(void* arg)
 
 /********************************************************************************
 * gpiod_line_new: Returnerar en pekare till en GPIO-linjen på angivet pin-nummer.
-*                 GPIO-linjen sätts till utport med låg utsignal vid start.
 *
 *                   - pin           : GPIO-linjens PIN-nummer.
-*                   - alias         : Alias/namn för GPIO-linjen.
 ********************************************************************************/
-static struct gpiod_line* gpiod_line_new(const uint8_t pin,
-                                         const char* alias)
+static struct gpiod_line* gpiod_line_new(const uint8_t pin)
 {
    static struct gpiod_chip* chip0 = 0;
    if (!chip0) chip0 = gpiod_chip_open("/dev/gpiochip0");
    struct gpiod_line* self = gpiod_chip_get_line(chip0, pin);
-   gpiod_line_request_output(self, alias, 0);
    return self;
 }
