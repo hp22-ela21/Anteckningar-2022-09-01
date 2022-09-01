@@ -34,7 +34,7 @@ void gpiod_thread_new(struct gpiod_thread* self,
 /********************************************************************************
 * gpiod_thread_run: Kör tråd för GPIO-linje, där utsignalen antingen togglas
 *                   med angiven blinkhastighet för att generera en blinkning
-*                   eller hålls avstängd.
+*                   eller hållas avstängd.
 * 
 *                   - arg: Generisk pekare till angiven GPIO-tråd, som måste
 *                          typomvandlas till korrekt pekartyp innan användning.
@@ -64,7 +64,7 @@ void* gpiod_thread_run(void* arg)
 /********************************************************************************
 * gpiod_line_new: Returnerar en pekare till en GPIO-linjen på angivet pin-nummer.
 *
-*                   - pin           : GPIO-linjens PIN-nummer.
+*                 - pin: GPIO-linjens PIN-nummer.
 ********************************************************************************/
 static struct gpiod_line* gpiod_line_new(const uint8_t pin)
 {
