@@ -1,5 +1,5 @@
 /********************************************************************************
-* gpiod_thread.h: Definition av externa funktioner för implementering av
+* gpiod_thread.c: Definition av externa funktioner för implementering av
 *                 GPIO-trådar via strukten gpiod_thread.
 ********************************************************************************/
 #include "gpiod_thread.h"
